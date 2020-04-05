@@ -46,6 +46,12 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
 
+  void _resetCounter() {
+    setState(() {
+      _counter = 0;
+    });
+  }
+
   void _incrementCounter() {
     setState(() {
       // This call to setState tells the Flutter framework that something has
@@ -54,6 +60,12 @@ class _MyHomePageState extends State<MyHomePage> {
       // _counter without calling setState(), then the build method would not be
       // called again, and so nothing would appear to happen.
       _counter++;
+    });
+  }
+
+  void _decrementCounter() {
+    setState(() {
+      _counter--;
     });
   }
 
@@ -98,13 +110,33 @@ class _MyHomePageState extends State<MyHomePage> {
               '$_counter',
               style: Theme.of(context).textTheme.display1,
             ),
+            Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: <Widget>[
+                  RaisedButton(
+                    color: Colors.red,
+                    child: Text(
+                      "Decrement",
+                      style: TextStyle(color: Colors.white),
+                    ),
+                    onPressed: _decrementCounter,
+                  ),
+                  RaisedButton(
+                    color: Colors.green,
+                    child: Text(
+                      "Increment",
+                      style: TextStyle(color: Colors.white),
+                    ),
+                    onPressed: _incrementCounter,
+                  ),
+                ]),
           ],
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: Icon(Icons.add),
+        onPressed: _resetCounter,
+        tooltip: 'Reset Counter',
+        child: Icon(Icons.refresh),
       ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
